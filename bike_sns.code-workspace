@@ -1,0 +1,16 @@
+{
+    "folders": [
+        {
+            "name": "webapp",
+            "path": "webapp"
+        },
+        {
+            "name": "scraping",
+            "path": "scraping"
+        },
+        {
+            "name": "all",
+            "path": "."
+        }
+    ]
+}
