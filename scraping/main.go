@@ -13,13 +13,13 @@ import (
 
 func main() {
 	bikeMaster := [][]string{
-		// {"1", "ホンダ", "HONDA"},
-		// {"2", "ヤマハ", "YAMAHA"},
-		// {"3", "スズキ", "SUZUKI"},
-		// {"4", "カワサキ", "KAWASAKI"},
-		// {"5", "ハーレーダビッドソン", "Harley-Davidson"},
-		// {"7", "ビーエムダブリュー", "BMW"},
-		// {"8", "ドゥカティ", "DUCATI"},
+		{"1", "ホンダ", "HONDA"},
+		{"2", "ヤマハ", "YAMAHA"},
+		{"3", "スズキ", "SUZUKI"},
+		{"4", "カワサキ", "KAWASAKI"},
+		{"5", "ハーレーダビッドソン", "Harley-Davidson"},
+		{"7", "ビーエムダブリュー", "BMW"},
+		{"8", "ドゥカティ", "DUCATI"},
 		{"10", "トライアンフ", "TRIUMPH"},
 		{"33", "ケーティーエム", "KTM"},
 	}
@@ -50,8 +50,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		doc.Find("a.bikemaker-name").Each(func(i int, s *goquery.Selection) {
+		doc.Selection.Find("a.bikemaker-name").Each(func(i int, s *goquery.Selection) {
 			bikeName := s.Text()
 			col := []string{v[0], v[1], v[2], bikeName}
 			w.Write(col)
