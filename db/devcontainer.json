@@ -1,0 +1,8 @@
+{
+    "name": "bike_sns_db",
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    "service": "db",
+    "remoteUser": "vscode"
+}
