@@ -31,7 +31,7 @@ CREATE TABLE followings(
 CREATE TABLE photos(
     id INT PRIMARY KEY AUTO_INCREMENT,
     post_id INT NOT NULL,
-    order INT NOT NULL,
+    order_num INT NOT NULL,
     FOREIGN KEY fk_post_id(post_id) REFERENCES posts(id)
 );
 

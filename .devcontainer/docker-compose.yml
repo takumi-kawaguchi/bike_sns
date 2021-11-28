@@ -1,28 +1,28 @@
 version: '3'
 services:
-  db:
+  database:
     image: mysql
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports: 
-      - '33306:3306'
+      - '33307:3307'
     expose: 
-      - '3306'
+      - '3307'
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: sample
+      MYSQL_ROOT_PASSWORD: bike_sns
+      MYSQL_DATABASE: bike_sns
       MYSQL_USER: test
       MYSQL_PASSWORD: test
       TZ: "Asia/Tokyo"
     volumes:
       - ../db/conf:/etc/mysql/conf.d
       - ../db/init:/docker-entrypoint-initdb.d
-  app:
-    build: ./
-    working_dir: /app
+  webapp:
+    build: .
+    working_dir: /go/src
     ports: 
       - '11323:1323'
     volumes:
-      - ../:/app
+      - ../webapp/:/go/src
     expose:
       - '1323'
     command: sleep infinity

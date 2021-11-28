@@ -1,0 +1,22 @@
+{
+    "name": "bike_sns_webapp",
+    "dockerComposeFile": [
+        "./docker-compose.yml"
+    ],
+    "service": "webapp",
+    "workspaceFolder": "/go/src",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "go.toolsManagement.checkForUpdates": "off",
+        "go.gopath": "/go",
+        "go.gocodeAutoBuild": true,
+        "go.useLanguageServer": true,
+        "editor.formatOnSave": false,
+        "[go]": {
+            "editor.formatOnSave": true
+        }
+    },
+    "extensions": [
+        "golang.go"
+    ],
+}
