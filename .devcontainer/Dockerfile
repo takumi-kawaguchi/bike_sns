@@ -7,4 +7,5 @@ ENV GO111MODULE on
 WORKDIR /go/src/work
 
 # install go tools
-RUN go get golang.org/x/tools/gopls
+RUN go get golang.org/x/tools/gopls \
+    github.com/go-delve/delve
