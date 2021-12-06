@@ -2,7 +2,7 @@ USE bike_sns;
 SET CHARACTER_SET_CLIENT = utf8;
 SET CHARACTER_SET_CONNECTION = utf8;
 
-CREATE TABLE users(
+CREATE TABLE IF NOT EXISTS users(
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_name VARCHAR(50) NOT NULL,
     name VARCHAR(50) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE users(
     created_at DATETIME NOT NULL
 );
 
-CREATE TABLE posts(
+CREATE TABLE IF NOT EXISTS posts(
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     body VARCHAR(1000) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE posts(
     FOREIGN KEY fk_user_id(user_id) REFERENCES users(id)
 );
 
-CREATE TABLE followings(
+CREATE TABLE IF NOT EXISTS followings(
     id INT PRIMARY KEY AUTO_INCREMENT,
     following_user_id INT NOT NULL,
     followed_user_id INT NOT NULL,
@@ -28,14 +28,14 @@ CREATE TABLE followings(
     FOREIGN KEY fk_followed_user_id(followed_user_id) REFERENCES users(id)
 );
 
-CREATE TABLE photos(
+CREATE TABLE IF NOT EXISTS photos(
     id INT PRIMARY KEY AUTO_INCREMENT,
     post_id INT NOT NULL,
     order_num INT NOT NULL,
     FOREIGN KEY fk_post_id(post_id) REFERENCES posts(id)
 );
 
-CREATE TABLE good_evaluations(
+CREATE TABLE IF NOT EXISTS good_evaluations(
     id INT PRIMARY KEY AUTO_INCREMENT,
     post_id INT NOT NULL,
     evaluator_user_id INT NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE good_evaluations(
     FOREIGN KEY fk_user_id(evaluator_user_id) REFERENCES users(id)
 );
 
-CREATE TABLE comments(
+CREATE TABLE IF NOT EXISTS comments(
     id INT PRIMARY KEY AUTO_INCREMENT,
     post_id INT NOT NULL,
     body VARCHAR(250) NOT NULL,
@@ -51,13 +51,13 @@ CREATE TABLE comments(
     FOREIGN KEY fk_post_id(post_id) REFERENCES posts(id)
 );
 
-CREATE TABLE bike_makers(
+CREATE TABLE IF NOT EXISTS bike_makers(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
     alphabet_name VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE bikes(
+CREATE TABLE IF NOT EXISTS bikes(
     id INT PRIMARY KEY AUTO_INCREMENT,
     maker_id INT NOT NULL,
     engine_capacity_class_id INT NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE bikes(
     FOREIGN KEY fk_engine_capacity_class_id(engine_capacity_class_id) REFERENCES engine_capacity_classes(id)
 );
 
-CREATE TABLE engine_capacity_classes(
+CREATE TABLE IF NOT EXISTS engine_capacity_classes(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL
 );
