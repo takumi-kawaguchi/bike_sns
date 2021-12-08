@@ -41,9 +41,10 @@ for bm_num in range(1, 3, 2):
         each_maker_capacity_classes.append(soup.select_one(f'#main > div > ul:nth-child({bm_num+1}) > li:nth-child({c_num}) > h2 > span').text)
 
     for bc_num in range(0, each_maker_capacity_count):
+        engine_capacity_classes_id = engine_capacity_classes_table[each_maker_capacity_classes[bc_num]]
         bc_resultset = soup.select(f'#main > div > ul:nth-child({bm_num+1}) > li:nth-child({bc_num+1}) > h2 + ul > li')
         for bike_tag in bc_resultset:
-            bikes.append([bike_id, bike_maker_id, bike_tag.text])
+            bikes.append([bike_id, bike_maker_id, engine_capacity_classes_id, bike_tag.text])
             bike_id += 1
 print('----- バイクメーカー取得完了 -----')
 
@@ -56,7 +57,7 @@ print('----- バイクメーカー書込完了 -----')
 
 with open('bikes.csv', 'w', encoding='utf-8', newline='') as bf:
     bfw = csv.writer(bf)
-    bfw.writerow(['id', 'maker_id', 'engine_capacity_class_id', 'name'])
+    bfw.writerow(['id', 'bike_maker_id', 'engine_capacity_class_id', 'name'])
     bfw.writerows(bikes)
 
 end_time = time.perf_counter()
