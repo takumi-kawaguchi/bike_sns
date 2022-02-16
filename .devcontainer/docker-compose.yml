@@ -17,7 +17,7 @@ services:
       - ../db/conf:/etc/mysql/conf.d
       - ../db/init:/docker-entrypoint-initdb.d
   webapp:
-    build: .
+    build: ./golang
     working_dir: /go/src
     ports: 
       - '11323:1323'
@@ -25,4 +25,14 @@ services:
       - ../webapp/:/go/src
     expose:
       - '1323'
+    command: sleep infinity
+  batch:
+    build: ./python
+    working_dir: /python/src
+    ports:
+      - '11324:1324'
+    volumes:
+      - ../scraping/:/python/src
+    expose:
+      - '1324'
     command: sleep infinity
