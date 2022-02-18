@@ -1,0 +1,8 @@
+{
+    "name": "bike_sns_batch",
+    "dockerComposeFile": [
+        "../../docker-compose.yml"
+    ],
+    "service": "batch",
+    "workspaceFolder": "/python/src"
+}

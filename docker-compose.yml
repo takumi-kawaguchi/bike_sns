@@ -1,7 +1,7 @@
 version: '3'
 services:
   database:
-    image: mysql
+    build: ./container_config/mysql
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports: 
       - '33307:3307'
@@ -14,25 +14,25 @@ services:
       MYSQL_PASSWORD: test
       TZ: "Asia/Tokyo"
     volumes:
-      - ../db/conf:/etc/mysql/conf.d
-      - ../db/init:/docker-entrypoint-initdb.d
+      - ./db/conf:/etc/mysql/conf.d
+      - ./db/init:/docker-entrypoint-initdb.d
   webapp:
-    build: ./golang
+    build: ./container_config/golang
     working_dir: /go/src
     ports: 
       - '11323:1323'
     volumes:
-      - ../webapp/:/go/src
+      - ./webapp/:/go/src
     expose:
       - '1323'
     command: sleep infinity
   batch:
-    build: ./python
+    build: ./container_config/python
     working_dir: /python/src
     ports:
       - '11324:1324'
     volumes:
-      - ../scraping/:/python/src
+      - ./scraping/:/python/src
     expose:
       - '1324'
     command: sleep infinity
