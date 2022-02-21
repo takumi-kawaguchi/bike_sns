@@ -4,5 +4,8 @@
         "../../docker-compose.yml"
     ],
     "service": "batch",
-    "workspaceFolder": "/python/src"
+    "workspaceFolder": "/python/src",
+    "extensions": [
+        "ms-python.python"
+    ]
 }
