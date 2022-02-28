@@ -1,31 +1,25 @@
 version: '3'
 services:
   database:
-    restart: always
-    container_name: bike-sns-db-container
-    build: ./container_config/mysql
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    hostname: 'bike_sns_db'
-    # port host:container
-    ports:
-      - '33307:3307'
-    expose: 
-      - '3307'
+    container_name: "bike-sns-db-container"
+    image: mysql:5.7
+    command: mysqld_safe --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-grant-tables
+    volumes:
+      - ./db/conf:/etc/mysql/conf.d
+      - ./db/init:/docker-entrypoint-initdb.d
+      - bike_sns_db_volume:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: bike_sns
       MYSQL_DATABASE: bike_sns
       MYSQL_USER: test
       MYSQL_PASSWORD: test
       TZ: "Asia/Tokyo"
-    volumes:
-      - ./db/conf:/etc/mysql/conf.d
-      - ./db/init:/docker-entrypoint-initdb.d
     networks:
       - bike_sns_net
   webapp:
     restart: always
-    container_name: bike-sns-webapp-container
-    build: ./container_config/golang
+    container_name: "bike-sns-webapp-container"
+    build: ./webapp
     working_dir: /go/src
     ports: 
       - '11323:1323'
@@ -42,7 +36,7 @@ services:
   batch:
     restart: always
     container_name: bike-sns-batch-container
-    build: ./container_config/python
+    build: ./scraping
     working_dir: /python/src
     ports:
       - '11324:1324'
@@ -59,3 +53,6 @@ services:
 networks:
   bike_sns_net:
     driver: bridge
+
+volumes:
+  bike_sns_db_volume:
